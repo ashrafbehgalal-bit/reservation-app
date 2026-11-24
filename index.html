@@ -31,7 +31,8 @@
     .card strong { display: block; margin-bottom: 4px; }
     .btn {
       display: flex; align-items: center; justify-content: center; width: 100%; min-height: 52px; margin-top: 10px;
-      border: 0; border-radius: 14px; font: 600 17px/1 inherit; text-decoration: none; cursor: pointer;
+      border: 0; border-radius: 14px; font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1;
+      text-decoration: none; cursor: pointer;
     }
     .gold { background: linear-gradient(180deg, #dcc08a, #c49a52); color: #1c1a16; }
     .plain { background: transparent; color: var(--gold); border: 1px solid var(--line); }
@@ -68,9 +69,10 @@
     } else {
       document.getElementById('rescue').hidden = false;
       document.getElementById('go').className = 'btn plain';
+      function n(k, word) { var c = count(k); return c + ' ' + word + (c === 1 ? '' : 's'); }
       document.getElementById('summary').textContent =
-        count('students') + ' students, ' + count('groups') + ' groups and ' + count('payments') +
-        ' payments. Save them before switching, then restore the file in the new app.';
+        n('students', 'student') + ', ' + n('groups', 'group') + ' and ' + n('payments', 'payment') +
+        '. Save them before switching, then restore the file in the new app.';
       document.getElementById('save').onclick = function () {
         var name = 'reservation-backup-' + new Date().toISOString().slice(0, 10) + '.json';
         var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
